@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FLIRTOO - Premium Fashion Collection</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #1a1a1a;
+            --secondary: #f4e4d7;
+            --accent: #c9a961;
+            --accent-light: #e8d5ba;
+            --text-light: #ffffff;
+            --text-muted: #a0a0a0;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--primary);
+            color: var(--text-light);
+            overflow-x: hidden;
+        }
+        
+        /* NAVIGATION */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 999;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid rgba(201, 169, 97, 0.1);
+        }
+        
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: block;
+            max-width: 180px;
+        }
+
+        .logo img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: contain;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        /* HERO SECTION */
+        .hero {
+            margin-top: 80px;
+            padding: 120px 2rem 80px;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(201, 169, 97, 0.05) 0%, transparent 100%);
+        }
+        
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            letter-spacing: 1px;
+            background: linear-gradient(135deg, var(--accent), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+        
+        /* VIDEO SECTION */
+        .video-section {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 100px 2rem;
+            align-content: center;
+        }
+        
+        .section-header {
+            margin-bottom: 60px;
+        }
+        
+        .section-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            color: var(--accent);
+        }
+        
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 1rem;
+            font-weight: 300;
+        }
+        
+        .video-container {
+            position: relative;
+            aspect-ratio: 16/9;
+            background: #000;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(201, 169, 97, 0.15);
+            animation: fadeInUp 0.8s ease;
+        }
+        
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        
+        /* GALLERY SECTION */
+        .gallery-section {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 100px 2rem;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+        
+        .product-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(201, 169, 97, 0.2);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .product-card:hover {
+            border-color: rgba(201, 169, 97, 0.6);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 20px 40px rgba(201, 169, 97, 0.2);
+            transform: translateY(-8px);
+        }
+        
+        .product-image {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            aspect-ratio: 1;
+            background: #222;
+        }
+        
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .product-card:hover .product-image img {
+            transform: scale(1.1);
+        }
+        
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--accent);
+            color: var(--primary);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        
+        .product-info {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .product-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+        
+        .product-category {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .rating-section {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+        
+        .stars {
+            display: flex;
+            gap: 3px;
+        }
+        
+        .star {
+            color: var(--accent);
+            font-size: 0.9rem;
+        }
+        
+        .rating-count {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+        
+        .price-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+        
+        .price {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--accent);
+            font-weight: 700;
+        }
+        
+        .original-price {
+            color: var(--text-muted);
+            text-decoration: line-through;
+            font-size: 0.95rem;
+        }
+        
+        .discount {
+            color: #ff6b6b;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        
+        .size-selector {
+            margin-bottom: 15px;
+        }
+        
+        .size-label {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .size-options {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        
+        .size-btn {
+            flex: 1;
+            min-width: 45px;
+            padding: 10px;
+            background: rgba(201, 169, 97, 0.1);
+            border: 1px solid rgba(201, 169, 97, 0.3);
+            color: var(--text-light);
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .size-btn:hover {
+            border-color: var(--accent);
+            background: rgba(201, 169, 97, 0.2);
+        }
+        
+        .size-btn.active {
+            background: var(--accent);
+            color: var(--primary);
+            border-color: var(--accent);
+        }
+        
+        .add-to-cart {
+            width: 100%;
+            padding: 12px;
+            background: var(--accent);
+            color: var(--primary);
+            border: none;
+            border-radius: 6px;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: auto;
+        }
+        
+        .add-to-cart:hover {
+            background: var(--accent-light);
+            transform: scale(1.02);
+        }
+        
+        .add-to-cart:active {
+            transform: scale(0.98);
+        }
+        
+        /* MODAL */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content-wrapper {
+            position: relative;
+            max-width: 90vw;
+            max-height: 90vh;
+            animation: zoomIn 0.3s ease;
+        }
+        
+        .modal-content {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        
+        .modal-close {
+            position: fixed;
+            top: 30px;
+            right: 40px;
+            color: var(--accent);
+            font-size: 40px;
+            cursor: pointer;
+            font-weight: 300;
+            transition: transform 0.3s ease;
+            z-index: 2001;
+        }
+        
+        .modal-close:hover {
+            transform: scale(1.2) rotate(90deg);
+        }
+        
+        /* ABOUT US SECTION */
+        .about-section {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 100px 2rem;
+            background: rgba(201, 169, 97, 0.02);
+        }
+        
+        .about-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        
+        .about-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: var(--accent);
+            margin-bottom: 30px;
+            line-height: 1.2;
+        }
+        
+        .about-content p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        
+        .about-features {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-top: 40px;
+        }
+        
+        .feature-item {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .feature-icon {
+            font-size: 2rem;
+            color: var(--accent);
+            min-width: 50px;
+            text-align: center;
+        }
+        
+        .feature-text h3 {
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+        
+        .feature-text p {
+            margin: 0;
+            font-size: 0.95rem;
+        }
+        
+        .about-image {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            background: linear-gradient(135deg, rgba(201, 169, 97, 0.2), rgba(228, 213, 170, 0.1));
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            border: 1px solid rgba(201, 169, 97, 0.3);
+        }
+        
+        /* FOOTER */
+        footer {
+            background: rgba(201, 169, 97, 0.05);
+            border-top: 1px solid rgba(201, 169, 97, 0.1);
+            padding: 80px 2rem 40px;
+            margin-top: 100px;
+        }
+        
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 50px;
+            margin-bottom: 60px;
+        }
+        
+        .footer-section h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+        
+        .footer-section p {
+            color: var(--text-muted);
+            line-height: 1.8;
+            font-weight: 300;
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(201, 169, 97, 0.1);
+            padding-top: 40px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        
+        /* ANIMATIONS */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes zoomIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section-header h2 {
+                font-size: 2rem;
+            }
+            
+            .nav-links {
+                gap: 1.5rem;
+                font-size: 0.9rem;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 15px;
+            }
+            
+            .product-card {
+                border-radius: 8px;
+            }
+            
+            .product-info {
+                padding: 15px;
+            }
+            
+            .product-name {
+                font-size: 1.1rem;
+            }
+            
+            .price {
+                font-size: 1.3rem;
+            }
+            
+            .size-options {
+                gap: 6px;
+            }
+            
+            .size-btn {
+                min-width: 40px;
+                padding: 8px;
+                font-size: 0.75rem;
+            }
+            
+            .about-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .about-content h2 {
+                font-size: 2rem;
+            }
+            
+            .about-image {
+                aspect-ratio: auto;
+                min-height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVIGATION -->
+    <nav>
+        <div class="nav-container">
+            <!-- Replace monsoon7.jpg with your own logo file as needed -->
+            <a class="logo" href="#">
+                <img src="monsoon7.jpg" alt="FLIRTOO logo">
+            </a>
+            <ul class="nav-links">
+                <li><a href="#video">Featured</a></li>
+                <li><a href="collections.html">Collections</a></li>
+                <li><a href="#about">About Us</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- HERO -->
+    <section class="hero">
+        <h1> Fascinating Fashion Experience</h1>
+        <background: img src="portait-handsome-man-posing-outdoors.jpg" alt="FLIRTOO Fashion" height="500px">
+        <p>Discover our exclusive collection of premium designs</p>
+    </section>
+    
+    <!-- VIDEO SECTION -->
+    <section class="video-section" id="video">
+        <div class="section-header">
+            <h2>Featured Campaign</h2>
+            <p>Explore our latest collection in motion</p>
+        </div>
+        <div class="video-container">
+            <video controls preload="metadata">
+                <source src="flirtoo fashion.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </section>
+    
+    <!-- GALLERIES -->
+    <section class="gallery-section" id="collections">
+        <div class="section-header">
+            <h2>Premium Collection</h2>
+            <p>Handpicked selection of our finest pieces</p>
+        </div>
+        <div class="gallery-grid" id="galleryP"></div>
+    </section>
+    
+    <section class="gallery-section">
+        <div class="section-header">
+            <h2>Signature Range</h2>
+            <p>Timeless designs for the modern wardrobe</p>
+        </div>
+        <div class="gallery-grid" id="galleryW"></div>
+    </section>
+    
+    <!-- MODAL -->
+    <div class="modal" id="imageModal">
+        <span class="modal-close" onclick="closeModal()">&times;</span>
+        <div class="modal-content-wrapper">
+            <img class="modal-content" id="modalImage">
+        </div>
+    </div>
+    
+    <!-- ABOUT US SECTION -->
+    <section class="about-section" id="about">
+        <div class="about-container">
+            <div class="about-content">
+                <h2>About Flirtoo</h2>
+                <p>We are a premium fashion collective dedicated to bringing you the finest curated collections of contemporary clothing and accessories. Our mission is to empower individuals through fashion that speaks to their unique style and personality.</p>
+                <p>With a commitment to quality, sustainability, and innovation, we carefully select each piece in our collections to ensure they meet the highest standards of craftsmanship and design.</p>
+                <div class="about-features">
+                    <div class="feature-item">
+                        <div class="feature-icon">✓</div>
+                        <div class="feature-text">
+                            <h3>Premium Quality</h3>
+                            <p>Carefully curated pieces from the finest designers and manufacturers</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">✓</div>
+                        <div class="feature-text">
+                            <h3>Sustainable Fashion</h3>
+                            <p>Committed to ethical sourcing and environmentally conscious practices</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">✓</div>
+                        <div class="feature-text">
+                            <h3>Customer First</h3>
+                            <p>Dedicated to providing exceptional service and support to every customer</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">✓</div>
+                        <div class="feature-text">
+                            <h3>Style Variety</h3>
+                            <p>Diverse collection spanning casual, formal, ethnic, and contemporary styles</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="about-image">
+                <img src="front-view-man-posing-outdoors.jpg" alt="About Flirtoo" height="700px">
+
+
+            </div>
+        </div>
+    </section>
+    
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>FLIRTOO</h3>
+                    <p>Elevating fashion through curated collections and exceptional design. Premium quality, contemporary aesthetics.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Collections</h3>
+                    <p>Our collections represent the finest in fashion design, combining timeless elegance with modern sensibilities.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Experience</h3>
+                    <p>From concept to delivery, every piece is crafted with meticulous attention to detail and quality.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 FLIRTOO. All rights reserved. | Premium Fashion Collective</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Product data with names, prices, ratings
+        
+        const productData = {
+            'P1.jpg': { name: 'Classics', category: 'mens wear', price: 3999, original: 5999, rating: 4.8, reviews: 245 },
+            'P2.jpg': { name: 'Kurtas', category: 'mens wear', price: 2499, original: 3999, rating: 4.6, reviews: 178 },
+            'P3.jpg': { name: 'Classic moments', category: 'mens wear', price: 2799, original: 4299, rating: 4.9, reviews: 312 },
+            'P3.1.jpg': { name: 'Premium moments', category: 'mens wear', price: 4499, original: 6999, rating: 4.7, reviews: 289 },
+            'P4.jpg': { name: 'Casual wear', category: 'mens wear', price: 1999, original: 2999, rating: 4.5, reviews: 156 },
+            'P5.jpg': { name: 'Casual moments', category: 'mens wear', price: 3299, original: 5299, rating: 4.8, reviews: 201 },
+            'P6.jpg': { name: 'Attitude Stand outs', category: 'mens wear', price: 2299, original: 3599, rating: 4.6, reviews: 134 },
+            'P7.jpg': { name: 'Casual collars', category: 'mens wear', price: 5999, original: 8999, rating: 4.9, reviews: 423 },
+            'P8.jpg': { name: 'Stand out classy', category: 'mens wear', price: 2999, original: 4499, rating: 4.7, reviews: 267 },
+            'P9.jpg': { name: 'Style perfectly', category: 'mens wear', price: 2199, original: 3499, rating: 4.8, reviews: 189 },
+            'P10.jpg': { name: 'Casual Tees', category: 'mens wear', price: 1899, original: 2999, rating: 4.5, reviews: 145 },
+            'P11.jpg': { name: 'Luxury style', category: 'mens wear', price: 1599, original: 2499, rating: 4.7, reviews: 98 },
+            'W1.jpg': { name: 'Premium Mens', category: 'mens wear', price: 4499, original: 6999, rating: 4.8, reviews: 234 },
+            'W2.jpg': { name: 'Classic Mens', category: 'mens wear', price: 3299, original: 5299, rating: 4.7, reviews: 189 },
+            'W3.jpg': { name: 'Casual Mens', category: 'mens wear', price: 2699, original: 4299, rating: 4.6, reviews: 167 },
+            'W4.jpg': { name: 'Formal Mens', category: 'mens wear', price: 5999, original: 8999, rating: 4.9, reviews: 345 },
+            'W5.jpg': { name: 'Smart Casual', category: 'mens wear', price: 3499, original: 5499, rating: 4.8, reviews: 212 },
+            'W6.jpg': { name: 'Trendy Mens', category: 'mens wear', price: 2899, original: 4599, rating: 4.7, reviews: 198 },
+            'W7.jpg': { name: 'Elegant Mens', category: 'mens wear', price: 4199, original: 6499, rating: 4.8, reviews: 256 },
+            'W8.jpg': { name: 'Style Mens', category: 'mens wear', price: 2499, original: 3999, rating: 4.6, reviews: 145 },
+            'W9.jpg': { name: 'Modern Mens', category: 'mens wear', price: 3099, original: 4899, rating: 4.7, reviews: 178 },
+            'W10.jpg': { name: 'Urban Mens', category: 'mens wear', price: 2399, original: 3899, rating: 4.5, reviews: 132 },
+            'W11.jpg': { name: 'Premium Casual', category: 'mens wear', price: 3699, original: 5799, rating: 4.8, reviews: 221 },
+        };
+        
+        const sizes = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
+        
+        // Create star rating HTML
+        function createStarRating(rating, count) {
+            const fullStars = Math.floor(rating);
+            const hasHalfStar = rating % 1 > 0;
+            let starsHtml = '';
+            
+            for (let i = 0; i < fullStars; i++) {
+                starsHtml += '<span class="star">★</span>';
+            }
+            if (hasHalfStar) {
+                starsHtml += '<span class="star" style="opacity: 0.5;">★</span>';
+            }
+            
+            return `
+                <div class="rating-section">
+                    <div class="stars">${starsHtml}</div>
+                    <span class="rating-count">${rating} (${count})</span>
+                </div>
+            `;
+        }
+        
+        // Create product cards
+        function createGallery(imageArray, galleryId, isPSeries = true) {
+            const gallery = document.getElementById(galleryId);
+            imageArray.forEach((img, index) => {
+                const product = productData[img];
+                if (!product) return;
+                
+                const discount = Math.round(((product.original - product.price) / product.original) * 100);
+                
+                const card = document.createElement('div');
+                card.className = 'name';
+                card.innerHTML = `
+                    <div class="product-image">
+                        <img src="${img}" alt="${product.name}" loading="lazy">
+                        <div class="product-badge">-${discount}%</div>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">${product.name}</div>
+                        <div class="product-category">${product.category}</div>
+                        ${createStarRating(product.rating, product.reviews)}
+                        <div class="price-section">
+                            <span class="price">₹${product.price}</span>
+                            <span class="original-price">₹${product.original}</span>
+                        </div>
+                        <div class="size-selector">
+                            <label class="size-label">Select Size:</label>
+                            <div class="size-options" data-product="${img}">
+                                ${sizes.map((size, i) => `<button class="size-btn ${i === 2 ? 'active' : ''}" data-size="${size}">${size}</button>`).join('')}
+                            </div>
+                        </div>
+                        <button class="add-to-cart" onclick="addToCart('${product.name}', this)">Add to Cart</button>
+                    </div>
+                `;
+                
+                // Add size button listeners
+                const sizeButtons = card.querySelectorAll('.size-btn');
+                sizeButtons.forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        sizeButtons.forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        const selectedSize = btn.dataset.size;
+                    });
+                });
+                
+                gallery.appendChild(card);
+            });
+        }
+        
+        function addToCart(productName, button) {
+            const originalText = button.textContent;
+            button.textContent = 'Added to Cart! ✓';
+            button.style.background = 'var(--accent-light)';
+            setTimeout(() => {
+                button.textContent = originalText;
+                button.style.background = '';
+            }, 2000);
+        }
+        
+        // Image data
+        const pImages = Array.from({length: 11}, (_, i) => `P${i+1}.jpg`);
+        const wImages = Array.from({length: 11}, (_, i) => `W${i+1}.jpg`);
+        
+        // Create galleries
+        
+        // Modal functions
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImage');
+        
+        function openModal(imageSrc) {
+            modal.classList.add('active');
+            modalImg.src = imageSrc;
+        }
+        
+        function closeModal() {
+            modal.classList.remove('active');
+        }
+        
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+        
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
+        });
+        
+        // Initialize
+        window.addEventListener('load', () => {
+            createGallery(pImages, 'galleryP', true);
+            createGallery(wImages, 'galleryW', false)
+        });
+        
+        // Video tracking
+        document.querySelector('video').addEventListener('play', () => {
+        });
+        
+        document.querySelector('video').addEventListener('pause', () => {
+        });
+    </script>
+</body>
+</html>
