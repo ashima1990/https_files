@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <!-- Slide Show -->
+    <section align="center";>
+      <img class="mySlides" src="logo.png" style="height:500px;" align="center";>
+      <img class="mySlides" src="poster.png" style="height:500px;" align="center";>
+      <img class="mySlides" src="logo_finale.png" style="height:500px;" align="center";>
+      <img class="mySlides" src="Screenshot 2026-08-11 214707.png" style="height:500px;" align="center";>
+    </section>
+    <script>
+      // Automatic Slideshow - change image every 5 seconds
+      var myIndex = 0;
+      carousel();
+
+      function carousel() {
+        var i;
+        var x = document.getElementsByClassName("mySlides");
+        for (i = 0; i < x.length; i++) {
+          x[i].style.display = "none";
+        }
+        myIndex++;
+        if (myIndex > x.length) {myIndex = 1}
+        x[myIndex-1].style.display = "block";
+        setTimeout(carousel, 5000);
+      }
+    </script>
+  </body>
+</html>
