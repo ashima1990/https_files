@@ -3,143 +3,33 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Tote SHIRT — turn meaningful T-shirts into unique, useful tote bags.">
+  <meta name="description" content="Tote SHIRT — meaningful T-shirts transformed into unique tote bags.">
   <title>Tote SHIRT | Memories, Reimagined</title>
   <link rel="stylesheet" href="css.css">
 </head>
-<body>
-  <nav class="nav" aria-label="Main navigation">
-    <a class="brand" href="#home">TOTE<span>SHIRT</span></a>
-    <button class="menu" aria-label="Open menu" aria-expanded="false">☰</button>
-    <div class="links">
-      <a href="#home">Home</a>
-      <a href="#story">Our Story</a>
-      <a href="#process">How It Works</a>
-      <a href="#contact">Contact</a>
+<body class="locked">
+  <section id="authGate" class="auth-gate" aria-label="Account access">
+    <div class="auth-brand">TOTE<span>SHIRT</span></div>
+    <div class="auth-card">
+      <div class="auth-heading"><p class="eyebrow">WELCOME TO TOTE SHIRT</p><h1>Keep your memories<br><em>close.</em></h1><p>Sign up or log in first, then enter the Tote SHIRT experience.</p></div>
+      <div class="auth-tabs"><button class="auth-tab active" data-auth="signup">Sign Up</button><button class="auth-tab" data-auth="login">Log In</button></div>
+      <form id="signupForm" class="auth-form"><div class="two-col"><label>First name<input id="firstName" type="text" required autocomplete="given-name"></label><label>Last name<input id="lastName" type="text" required autocomplete="family-name"></label></div><label>Email<input id="signupEmail" type="email" required autocomplete="email"></label><label>Password<input id="signupPassword" type="password" minlength="6" required autocomplete="new-password"></label><button class="button full" type="submit">Create account <span>→</span></button></form>
+      <form id="loginForm" class="auth-form hidden"><label>Email<input id="loginEmail" type="email" required autocomplete="email"></label><label>Password<input id="loginPassword" type="password" required autocomplete="current-password"></label><button class="button full" type="submit">Log in <span>→</span></button></form>
+      <p id="authMessage" class="auth-message" role="status"></p><small class="prototype-note">Prototype access only: real authentication needs a secure backend.</small>
     </div>
-  </nav>
+  </section>
 
-  <main>
-    <section id="home" class="hero">
-      <div class="hero-copy">
-        <p class="eyebrow">UPCYCLE • REMEMBER • REUSE</p>
-        <h1>Turn old memories into <em>something new.</em></h1>
-        <p class="lead">Tote SHIRT transforms meaningful T-shirts into unique, useful tote bags—so your favorite memories can stay with you wherever you go.</p>
-        <a class="button" href="#story">Discover the idea <span>→</span></a>
-      </div>
-      <div class="hero-art" aria-label="Illustration of an upcycled tote bag">
-        <div class="sun"></div>
-        <div class="bag"><div class="handle"></div><div class="label">TOTE<br>SHIRT</div></div>
-        <div class="leaf leaf-a"></div><div class="leaf leaf-b"></div>
-      </div>
-    </section>
-
-    <section id="story" class="section story">
-      <div><p class="eyebrow">OUR STORY</p><h2>A bag with a story behind it.</h2></div>
-      <p>Tote SHIRT is an upcycling project built around sustainability, creativity, and memories. Instead of letting a special T-shirt sit unused, we give it a second life as a tote bag you can actually carry.</p>
-    </section>
-
-    <section class="cards" aria-label="Our values">
-      <article><span>01</span><h3>Upcycle</h3><p>Give an unused T-shirt a new purpose and keep useful fabric in circulation.</p></article>
-      <article><span>02</span><h3>Remember</h3><p>Carry the memories connected to friends, family, colleagues, or someone special.</p></article>
-      <article><span>03</span><h3>Express</h3><p>Create something personal that feels different from an ordinary bag.</p></article>
-    </section>
-
-    <section id="process" class="section process">
-      <p class="eyebrow">HOW IT WORKS</p><h2>From favorite shirt to favorite tote.</h2>
-      <div class="steps">
-        <div><b>01</b><strong>Choose</strong><p>Pick a T-shirt that means something to you.</p></div>
-        <div><b>02</b><strong>Transform</strong><p>Give the fabric a practical new purpose.</p></div>
-        <div><b>03</b><strong>Carry</strong><p>Take your memories with you, every day.</p></div>
-      </div>
-    </section>
-
-    <section id="contact" class="cta">
-      <p class="eyebrow">MEMORIES STAY WITH YOU</p>
-      <h2>Make your old favorite<br><em>new again.</em></h2>
-      <a class="button light" href="mailto:hello@toteshirt.example">Get in touch <span>→</span></a>
-    </section>
-  </main>
-  <footer>© 2026 Tote SHIRT • Made with purpose.</footer>
+  <div id="siteContent" class="site-content" aria-hidden="true">
+    <nav class="nav" aria-label="Main navigation"><a class="brand" href="#home">TOTE<span>SHIRT</span></a><div class="nav-right"><button id="logoutBtn" class="logout">Log out</button><button class="menu" aria-label="Open menu" aria-expanded="false">☰</button></div><div class="links"><a href="#home">Home</a><a href="#story">Our Story</a><a href="#process">How It Works</a><a href="#payment">Payment</a><a href="#contact">Contact</a></div></nav>
+    <main>
+      <section id="home" class="hero"><div class="hero-copy"><p class="eyebrow">UPCYCLE • REMEMBER • REUSE</p><h2>Turn old memories into <em>something new.</em></h2><p class="lead">Tote SHIRT transforms meaningful T-shirts into unique, useful tote bags—so your favorite memories can stay with you wherever you go.</p><a class="button" href="#payment">Shop & checkout <span>→</span></a></div><div class="hero-art" aria-label="Illustration of an upcycled tote bag"><div class="sun"></div><div class="bag"><div class="handle"></div><div class="label">TOTE<br>SHIRT</div></div><div class="leaf leaf-a"></div><div class="leaf leaf-b"></div></div></section>
+      <section id="story" class="section story"><div><p class="eyebrow">OUR STORY</p><h2>A bag with a story behind it.</h2></div><p>Tote SHIRT is an upcycling project built around sustainability, creativity, and memories. Instead of letting a special T-shirt sit unused, we give it a second life as a tote bag you can actually carry.</p></section>
+      <section class="cards" aria-label="Our values"><article><span>01</span><h3>Upcycle</h3><p>Give an unused T-shirt a new purpose and keep useful fabric in circulation.</p></article><article><span>02</span><h3>Remember</h3><p>Carry the memories connected to friends, family, colleagues, or someone special.</p></article><article><span>03</span><h3>Express</h3><p>Create something personal that feels different from an ordinary bag.</p></article></section>
+      <section id="process" class="section process"><p class="eyebrow">HOW IT WORKS</p><h2>From favorite shirt to favorite tote.</h2><div class="steps"><div><b>01</b><strong>Choose</strong><p>Pick a T-shirt that means something to you.</p></div><div><b>02</b><strong>Transform</strong><p>Give the fabric a practical new purpose.</p></div><div><b>03</b><strong>Carry</strong><p>Take your memories with you, every day.</p></div></div></section>
+      <section id="payment" class="payment-section"><div class="payment-intro"><p class="eyebrow">CHECKOUT</p><h2>Your Tote SHIRT<br><em>order.</em></h2><p>Choose your quantity and preferred payment method. This is the checkout structure; a real payment gateway must be connected before accepting live payments.</p></div><div class="checkout-card"><div class="product-row"><div><strong>Upcycled Tote Bag</strong><small>Made from a meaningful T-shirt</small></div><div class="price">₹799</div></div><label>Quantity<input id="quantity" type="number" min="1" max="10" value="1"></label><div class="total-row"><span>Total</span><strong id="total">₹799</strong></div><div class="payment-methods"><p>Payment method</p><label><input type="radio" name="payment" value="gateway" checked> Secure payment gateway</label><label><input type="radio" name="payment" value="upi"> UPI</label><label><input type="radio" name="payment" value="cod"> Cash on delivery</label></div><button id="payBtn" class="button full" type="button">Continue to payment <span>→</span></button><p id="paymentMessage" class="payment-message"></p><small>For live payments, connect this button to your merchant payment provider. Never store card numbers or passwords in this GitHub Pages code.</small></div></section>
+      <section id="contact" class="cta"><p class="eyebrow">MEMORIES STAY WITH YOU</p><h2>Make your old favorite<br><em>new again.</em></h2><a class="button light" href="mailto:toteshirtindia@gmail.com">Email Tote SHIRT <span>→</span></a><p class="email">toteshirtindia@gmail.com</p></section>
+    </main><footer>© 2026 Tote SHIRT • Made with purpose.</footer>
+  </div>
   <script src="script.js"></script>
-  <div class="form">
-      
-      <ul class="tab-group">
-        <li class="tab active"><a href="">Sign Up</a></li>
-        <li class="tab"><a href="#login">Log In</a></li>
-      </ul>
-      
-      <div class="tab-content">
-        <div id="signup">   
-          <h1>Sign Up for Free</h1>
-          
-          <form action="/" method="post">
-          
-          <div class="top-row">
-            <div class="field-wrap">
-              <label>
-                First Name<span class="req">*</span>
-              </label>
-              <input type="text" required autocomplete="off" />
-            </div>
-        
-            <div class="field-wrap">
-              <label>
-                Last Name<span class="req">*</span>
-              </label>
-              <input type="text"required autocomplete="off"/>
-            </div>
-          </div>
-
-          <div class="field-wrap">
-            <label>
-              Email Address<span class="req">*</span>
-            </label>
-            <input type="email"required autocomplete="off"/>
-          </div>
-          
-          <div class="field-wrap">
-            <label>
-              Set A Password<span class="req">*</span>
-            </label>
-            <input type="password"required autocomplete="off"/>
-          </div>
-          
-          <button type="submit" class="button button-block"/>Get Started</button>
-          
-          </form>
-
-        </div>
-        
-        <div id="login">   
-          <h1>Welcome Back!</h1>
-          
-          <form action="/" method="post">
-          
-            <div class="field-wrap">
-            <label>
-              Email Address<span class="req">*</span>
-            </label>
-            <input type="email"required autocomplete="off"/>
-          </div>
-          
-          <div class="field-wrap">
-            <label>
-              Password<span class="req">*</span>
-            </label>
-            <input type="password"required autocomplete="off"/>
-          </div>
-          
-          <p class="forgot"><a href="#">Forgot Password?</a></p>
-          
-          <button class="button button-block"/>Log In</button>
-          
-          </form>
-
-        </div>
-        
-      </div><!-- tab-content -->
-      
-</div> <!-- /form -->
 </body>
 </html>
