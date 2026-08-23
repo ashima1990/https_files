@@ -1,11 +1,287 @@
-const authGate=document.getElementById('authGate');const siteContent=document.getElementById('siteContent');const signupForm=document.getElementById('signupForm');const loginForm=document.getElementById('loginForm');const authMessage=document.getElementById('authMessage');const tabs=document.querySelectorAll('.auth-tab');
-function unlockSite(name=''){localStorage.setItem('toteShirtLoggedIn','true');if(name)localStorage.setItem('toteShirtName',name);authGate.classList.add('hidden');siteContent.classList.add('unlocked');siteContent.setAttribute('aria-hidden','false');document.body.classList.remove('locked');window.scrollTo(0,0);setTimeout(initReveal,80)}
-// Keep the sign-up / log-in screen as the first thing visitors see on every open.
-localStorage.removeItem('toteShirtLoggedIn');localStorage.removeItem('toteShirtName');authGate.classList.remove('hidden');siteContent.classList.remove('unlocked');siteContent.setAttribute('aria-hidden','true');document.body.classList.add('locked');
-tabs.forEach(tab=>tab.addEventListener('click',()=>{const login=tab.dataset.auth==='login';tabs.forEach(t=>t.classList.toggle('active',t===tab));signupForm.classList.toggle('hidden',login);loginForm.classList.toggle('hidden',!login);authMessage.textContent=''}));
-signupForm.addEventListener('submit',e=>{e.preventDefault();unlockSite(document.getElementById('firstName').value.trim())});loginForm.addEventListener('submit',e=>{e.preventDefault();unlockSite()});
-document.getElementById('logoutBtn').addEventListener('click',()=>{localStorage.removeItem('toteShirtLoggedIn');localStorage.removeItem('toteShirtName');location.reload()});
-const menu=document.querySelector('.menu');const links=document.querySelector('.links');menu?.addEventListener('click',()=>{links.classList.toggle('open');menu.setAttribute('aria-expanded',links.classList.contains('open'))});document.querySelectorAll('.links a').forEach(a=>a.addEventListener('click',()=>links.classList.remove('open')));
-const quantity=document.getElementById('quantity');const total=document.getElementById('total');const payBtn=document.getElementById('payBtn');const paymentMessage=document.getElementById('paymentMessage');function updateTotal(){const qty=Math.min(10,Math.max(1,Number(quantity.value)||1));quantity.value=qty;total.textContent=`₹${(150*qty).toLocaleString('en-IN')}`}quantity?.addEventListener('input',updateTotal);updateTotal();payBtn?.addEventListener('click',()=>{const method=document.querySelector('input[name="payment"]:checked')?.value;const amount=total.textContent;if(method==='cod')paymentMessage.textContent=`Order request ready for ${amount}. We will contact you at toteshirtindia@gmail.com.`;else paymentMessage.textContent=`Checkout is ready for ${amount}. A real payment gateway still needs to be connected before live payments can be accepted.`});
-function initReveal(){const items=document.querySelectorAll('.reveal');if(!('IntersectionObserver' in window)){items.forEach(x=>x.classList.add('visible'));return}const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target)}})},{threshold:.12});items.forEach(item=>observer.observe(item))}
-if(!document.body.classList.contains('locked'))initReveal();
+const authScreen = document.getElementById("authScreen");
+const mainWebsite = document.getElementById("mainWebsite");
+
+const authForm = document.getElementById("authForm");
+
+const loginTab = document.getElementById("loginTab");
+const signupTab = document.getElementById("signupTab");
+
+const authTitle = document.getElementById("authTitle");
+const authButton = document.getElementById("authButton");
+
+const nameGroup = document.getElementById("nameGroup");
+const nameInput = document.getElementById("name");
+
+const emailInput = document.getElementById("email");
+const passwordInput = document.getElementById("password");
+
+const logoutButton = document.getElementById("logoutButton");
+
+
+/* =========================================================
+   AUTHENTICATION MODE
+   ========================================================= */
+
+let currentMode = "login";
+
+
+/* =========================================================
+   SHOW MAIN WEBSITE
+   ========================================================= */
+
+function showWebsite() {
+
+    authScreen.style.display = "none";
+
+    mainWebsite.style.display = "block";
+
+    window.scrollTo({
+        top: 0,
+        behavior: "instant"
+    });
+}
+
+
+/* =========================================================
+   SHOW LOGIN SCREEN
+   ========================================================= */
+
+function showLoginScreen() {
+
+    authScreen.style.display = "grid";
+
+    mainWebsite.style.display = "none";
+
+    window.scrollTo({
+        top: 0,
+        behavior: "instant"
+    });
+}
+
+
+/* =========================================================
+   LOGIN / SIGN UP TAB
+   ========================================================= */
+
+loginTab.addEventListener("click", function () {
+
+    currentMode = "login";
+
+    loginTab.classList.add("active");
+
+    signupTab.classList.remove("active");
+
+    authTitle.textContent = "Welcome back";
+
+    authButton.textContent = "Log in";
+
+    nameGroup.style.display = "none";
+
+    nameInput.required = false;
+
+});
+
+
+signupTab.addEventListener("click", function () {
+
+    currentMode = "signup";
+
+    signupTab.classList.add("active");
+
+    loginTab.classList.remove("active");
+
+    authTitle.textContent = "Create your account";
+
+    authButton.textContent = "Create account";
+
+    nameGroup.style.display = "block";
+
+    nameInput.required = true;
+
+});
+
+
+
+/* =========================================================
+   FORM SUBMISSION
+   ========================================================= */
+
+authForm.addEventListener("submit", function (event) {
+
+    event.preventDefault();
+
+
+    const email = emailInput.value.trim();
+
+    const password = passwordInput.value.trim();
+
+    const name = nameInput.value.trim();
+
+
+    /* Basic validation */
+
+    if (email === "") {
+
+        alert("Please enter your email.");
+
+        return;
+
+    }
+
+
+    if (password === "") {
+
+        alert("Please enter your password.");
+
+        return;
+
+    }
+
+
+    if (currentMode === "signup" && name === "") {
+
+        alert("Please enter your name.");
+
+        return;
+
+    }
+
+
+    /*
+       This is a front-end demo.
+
+       It does NOT send your password anywhere.
+       The login state is simply remembered
+       in this browser.
+    */
+
+    localStorage.setItem(
+        "toteshirtLoggedIn",
+        "true"
+    );
+
+
+    localStorage.setItem(
+        "toteshirtEmail",
+        email
+    );
+
+
+    if (name !== "") {
+
+        localStorage.setItem(
+            "toteshirtName",
+            name
+        );
+
+    }
+
+
+    /* Open the actual website */
+
+    showWebsite();
+
+});
+
+
+
+/* =========================================================
+   LOG OUT
+   ========================================================= */
+
+logoutButton.addEventListener("click", function () {
+
+    localStorage.removeItem(
+        "toteshirtLoggedIn"
+    );
+
+    localStorage.removeItem(
+        "toteshirtEmail"
+    );
+
+    localStorage.removeItem(
+        "toteshirtName"
+    );
+
+
+    /* Reset form */
+
+    authForm.reset();
+
+
+    /* Return to login */
+
+    showLoginScreen();
+
+
+    /* Return to login mode */
+
+    currentMode = "login";
+
+    loginTab.classList.add("active");
+
+    signupTab.classList.remove("active");
+
+    authTitle.textContent = "Welcome back";
+
+    authButton.textContent = "Log in";
+
+    nameGroup.style.display = "none";
+
+    nameInput.required = false;
+
+});
+
+
+
+/* =========================================================
+   CHECK LOGIN WHEN WEBSITE OPENS
+   ========================================================= */
+
+const alreadyLoggedIn =
+    localStorage.getItem("retoteLoggedIn");
+
+
+if (alreadyLoggedIn === "true") {
+
+    showWebsite();
+
+} else {
+
+    showLoginScreen();
+
+}
+
+
+
+/* =========================================================
+   SMOOTH NAVIGATION
+   ========================================================= */
+
+document
+    .querySelectorAll('a[href^="#"]')
+    .forEach(function (link) {
+
+        link.addEventListener("click", function (event) {
+
+            const targetId =
+                link.getAttribute("href");
+
+            const target =
+                document.querySelector(targetId);
+
+
+            if (target) {
+
+                event.preventDefault();
+
+                target.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+
+            }
+
+        });
+
+    });
