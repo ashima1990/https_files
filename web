@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Website</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div class="topnav">
+      <a class="active" href="#home">Home</a>
+      <a href="#about">About-Me</a>
+      <a href="#contact">Gallery</a>
+      <a href="#contact">Contact-Us</a>
+    </div><br>
+
+    <span class="border trans" style="font-size:40px;">
+      <center>Welcome all to this website</center>
+    </span><br>
+    
+    <section class="section section-dark">
+      <h2>Section One</h2>
+      <p>
+        Web development is the work involved in developing a Web site for the Internet (World Wide Web) or an intranet (a private network).
+      </p>
+    </section>
+
+    <div class="pimg3">
+      <div class="ptext">
+        <span class="border trans">Image Two Text</span>
+      </div>
+    </div>
+
+    <section class="section section-dark">
+      <span>All @copy rights reserved by Swati Singh</span>
+    </section>
+  </body>
+</html>
